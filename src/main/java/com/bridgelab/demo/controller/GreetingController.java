@@ -1,46 +1,25 @@
 package com.bridgelab.demo.controller;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelab.demo.model.UserGreeting;
+import com.bridgelab.demo.model.Greeting;
 
 @RestController
-@RequestMapping("/greeting")
+@RequestMapping("/GreetingController")
 public class GreetingController {
-	@RequestMapping(value = {"","/","/home"})
-	public String sayGreetings() {
-		return "Greetings";
-	}
-	@RequestMapping(method = RequestMethod.GET, value = {"/query"})
-	public String sayGreeting(@RequestParam(value = "name") String name) {
-		return "Greeting "+name+"!";
-		
-	}
-	@GetMapping("/param/{name}")
-	public String sayGreetingParam(@PathVariable String name) {
-		return "Greeting "+name+ "!";
-		
-	}
-	
-	@PostMapping("/post")
-	public String sayGreeting(@RequestBody UserGreeting user) {
-		return "Greeting"+ user.getFirstName() + " "+user.getLastName() + "!";
-		
-	}
-	
-	
-	@PutMapping("/put/{firstName}")
-	public String sayGreetingPut(@PathVariable String firstName, @RequestParam(value= "lastName") String lastName) {
-		return "Greeting" + firstName + " " + lastName + "!";
-	}
-	
+	private static final String template = "Hello, %s!";
+	private final AtomicLong counter = new AtomicLong();
 
+	
+	@GetMapping("/greeting")
+	public Greeting greeting(@RequestParam(value = "name", defaultValue = "world")String name) {
+		return new Greeting(counter.incrementAndGet(),     
+	               String.format(template, name));
+	}
+	
 }
