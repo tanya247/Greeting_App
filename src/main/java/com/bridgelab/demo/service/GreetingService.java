@@ -1,5 +1,7 @@
 package com.bridgelab.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,11 @@ public class GreetingService implements IGreetingService{
 	public Greeting getGreetingById(long id) {
 		return greetingRepository.findById(id).get();
 	}
+	@Override
+	public List<Greeting> findAllEntries() {
+		return greetingRepository.findAll();
+	}
 
 
 	
 }
-;

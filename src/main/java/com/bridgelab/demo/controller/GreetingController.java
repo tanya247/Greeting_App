@@ -1,5 +1,7 @@
 package com.bridgelab.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,5 +31,10 @@ public class GreetingController {
 	@GetMapping("/find/{id}")
 	public Greeting findById(@PathVariable long id) {
 		return greeting.getGreetingById(id);
+	}
+	
+	@GetMapping("/findall")
+	public List<Greeting> findAllEntries(){
+		return greeting.findAllEntries();
 	}
 }
