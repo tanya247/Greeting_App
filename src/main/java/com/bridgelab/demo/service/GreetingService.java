@@ -1,6 +1,5 @@
 package com.bridgelab.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -32,6 +31,11 @@ public class GreetingService implements IGreetingService{
 	@Override
 	public void deleteEntries(long id) {
 		greetingRepository.deleteById(id);
+	}
+	@Override
+	public Greeting editEntries(User user,long id) {
+		String message = String.format(template, (user.toString().isEmpty())?"Hello World" : user.toString());
+		return greetingRepository.save(new Greeting(id, message));
 	}
 
 

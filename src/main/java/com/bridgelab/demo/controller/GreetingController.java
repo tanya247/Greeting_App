@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,14 @@ public class GreetingController {
 	@GetMapping("/findall")
 	public List<Greeting> findAllEntries(){
 		return greeting.findAllEntries();
+	}
+	
+	@PutMapping("/update/{id}")
+	public Greeting greeting(@PathVariable long id, @RequestParam(value = "name", defaultValue = "Spring")String name,@RequestParam(value = "lname", defaultValue = "world")String lname) {
+		User user = new User();
+		user.setFirstName(name);
+		user.setLastName(lname);		
+		return greeting.editEntries(user, id);
 	}
 	
 	@DeleteMapping("/delete/{id}")
