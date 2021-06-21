@@ -28,6 +28,11 @@ public class GreetingService implements IGreetingService{
 	public List<Greeting> findAllEntries() {
 		return greetingRepository.findAll();
 	}
+	
+	@Override
+	public void deleteEntries(long id) {
+		greetingRepository.deleteById(id);
+	}
 
 
 	
