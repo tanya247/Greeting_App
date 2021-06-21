@@ -20,7 +20,7 @@ public class GreetingService implements IGreetingService{
 		return greetingRepository.save(new Greeting(counter.incrementAndGet(), message));
 	}
 	public Greeting getGreetingById(long id) {
-		return null;
+		return greetingRepository.findById(id).get();
 	}
 
 

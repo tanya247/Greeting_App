@@ -2,6 +2,7 @@ package com.bridgelab.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +26,8 @@ public class GreetingController {
 		return greeting.addGreeting(user);
 	}
 	
+	@GetMapping("/find/{id}")
+	public Greeting findById(@PathVariable long id) {
+		return greeting.getGreetingById(id);
+	}
 }
